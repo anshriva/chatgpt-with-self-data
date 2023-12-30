@@ -1,7 +1,7 @@
-langchain
-openai
-flask
-jq
-chromadb
-tiktoken
-unstructured
+langchain == 0.0.353
+openai ==  1.6.1
+flask == 3.0.0
+jq == 1.6.0
+chromadb == 0.4.21
+tiktoken == 0.5.2
+unstructured == 0.11.6
