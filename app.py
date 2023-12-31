@@ -16,20 +16,20 @@ PERSIST = True
 query = None
 
 if PERSIST and os.path.exists("persist"):
-    print("Reusing index...\n")
-    vectorstore = Chroma(persist_directory="persist", embedding_function=OpenAIEmbeddings())
-    index = VectorStoreIndexWrapper(vectorstore=vectorstore)
+  print("Reusing index...\n")
+  vectorstore = Chroma(persist_directory="persist", embedding_function=OpenAIEmbeddings())
+  index = VectorStoreIndexWrapper(vectorstore=vectorstore)
 else:
-    loader = DirectoryLoader("data/", glob='**/*.json', show_progress=True, loader_cls=TextLoader)
-
-    if PERSIST:
-        index = VectorstoreIndexCreator(vectorstore_kwargs={"persist_directory": "persist"}).from_loaders([loader])
-    else:
-        index = VectorstoreIndexCreator().from_loaders([loader])
+  #loader = TextLoader("data/data.txt") # Use this line if you only need data.txt
+  loader = DirectoryLoader("data/", glob="*.txt")
+  if PERSIST:
+    index = VectorstoreIndexCreator(vectorstore_kwargs={"persist_directory":"persist"}).from_loaders([loader])
+  else:
+    index = VectorstoreIndexCreator().from_loaders([loader])
 
 chain = ConversationalRetrievalChain.from_llm(
-    llm=ChatOpenAI(model="gpt-3.5-turbo"),
-    retriever=index.vectorstore.as_retriever(search_kwargs={"k": 1}),
+  llm=ChatOpenAI(model="gpt-3.5-turbo"),
+  retriever=index.vectorstore.as_retriever(search_kwargs={"k": 1}),
 )
 
 chat_history = []
@@ -47,7 +47,7 @@ def chat():
 
     result = chain({"question": query, "chat_history": chat_history})
     response = {"answer": result['answer']}
-    # chat_history.append((query, result['answer']))
+    chat_history.append((query, result['answer']))
     return jsonify(response)
 
 if __name__ == '__main__':
