@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_e21aa57cf4a943a0ae227d39703e2ea1 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_714f080919a542cd8731dea4b6b7d9fe }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_5268e806447b4e3bbcfa8303ba727dd8 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_4da67461fc834baa9d7161da0939284d }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e21aa57cf4a943a0ae227d39703e2ea1 }}/anshriva/anubhav_sales:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_5268e806447b4e3bbcfa8303ba727dd8 }}/anshriva/anubhav_sales:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'anubhav-demo'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_60e60cee9df84aadb8b81568ef8870a7 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e21aa57cf4a943a0ae227d39703e2ea1 }}/anshriva/anubhav_sales:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_c680df4488814d958743837b711309b7 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_5268e806447b4e3bbcfa8303ba727dd8 }}/anshriva/anubhav_sales:${{ github.sha }}'
