@@ -13,8 +13,8 @@ RUN pip install flask  # Add this line to install Flask
 RUN pip install gunicorn
 
 # Make port 5000 available to the world outside this container
-EXPOSE 8080
+EXPOSE 80
 
 
 # Run app.py when the container launches
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:80", "app:app"]
