@@ -12,6 +12,8 @@ Then you can access the API using :
 curl -X POST -H "Content-Type: application/json" -d '{"prompt": "give me product for women"}' http://127.0.0.1:5000/chat
 ``
 
-Run on local using: 
-flask run
+Run on local using: <br> 
+gunicorn -b 0.0.0.0:80 app:app
 
+### run on github pages
+https://anshriva.github.io/chatgpt-with-self-data/ 
