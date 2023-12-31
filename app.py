@@ -47,7 +47,7 @@ def chat():
 
     result = chain({"question": query, "chat_history": chat_history})
     response = {"answer": result['answer']}
-    chat_history.append((query, result['answer']))
+    # chat_history.append((query, result['answer']))
     return jsonify(response)
 
 if __name__ == '__main__':
