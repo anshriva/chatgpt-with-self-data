@@ -1,5 +1,6 @@
 import os
 import sys
+from flask_cors import CORS 
 from flask import Flask, request, jsonify
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
@@ -34,6 +35,7 @@ chain = ConversationalRetrievalChain.from_llm(
 chat_history = []
 
 app = Flask(__name__)
+CORS(app) 
 
 @app.route('/chat', methods=['POST'])
 def chat():
